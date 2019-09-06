@@ -1,0 +1,111 @@
+<div class="container-fluid max-height">
+	<div class="row max-height">
+		<div class="col-md-6 max-height" id="left-window">
+			<div id="login-page">
+				<div class="container container-login-up">
+					<div class="row">
+						<h2 class="welcome-message">Let's play! :)</h2>
+					</div>
+				</div>
+
+				<div class="row container-login-down">
+					<ul class="nav nav-tabs" id="nav-tabs">
+						{{#ifCond type "login"}}
+							<li class="nav-item"><a data-toggle="tab" href="#login" class="nav-link active">Log in</a></li>
+						{{else}}
+							<li class="nav-item"><a data-toggle="tab" href="#login" class="nav-link">Log in</a></li>
+						{{/ifCond}}
+						{{#ifCond type "signup"}}
+							<li class="nav-item"><a data-toggle="tab" href="#signup" class="nav-link active">Sign up</a></li>
+						{{else}}
+							<li class="nav-item"><a data-toggle="tab" href="#signup" class="nav-link">Sign up</a></li>
+						{{/ifCond}}
+						{{#ifCond type "playasguest"}}
+							<li class="nav-item"><a data-toggle="tab" href="#playasguest" class="nav-link active">Guest</a></li>
+						{{else}}
+							<li class="nav-item"><a data-toggle="tab" href="#playasguest" class="nav-link">Guest</a></li>
+						{{/ifCond}}
+					</ul>
+					<div class="container tab-container">
+						<div class="tab-content">
+							<div id="login" class="tab-pane fade">
+								<div class="container">
+									<div class="row">
+										<div class="container" id="formContainer">
+											<form id="login-form" role="form" action="/users/login" method="POST">
+												<h3 class="form-signin-heading">Please log in</h3>
+												<input type="text" class="username form-control" name="loginNickname" id="loginNickname" placeholder="Nickname" required autofocus>
+												<p class="username_feedback error"></p>
+												<input type="password" class="password form-control" name="loginPass" id="loginPass"  placeholder="Password" required>
+												<p class="password_feedback error"></p>
+												<p class="dberror error">
+												</p>
+												<button class="submit_btn btn btn-primary" type="submit" name="loginForm">Login</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="signup" class="tab-pane fade">
+								<div class="container">
+									<div class="row">
+										<div class="container" id="formContainer">
+											<form id="signup-form" role="form" action="/users/register" method="POST">
+												<h3 class="form-signin-heading">Please sign up</h3>
+												<input type="text" class="fullname form-control" name="signupFullName" id="signupFullName" placeholder="Full name" required autofocus>
+												<p class="fullname_feedback error"></p>
+												<input type="text" class="username form-control" name="signupNickname" id="signupNickname" placeholder="Nickname" required autofocus>
+												<p class="username_feedback error"></p>
+												<input type="email" class="email form-control" name="signupEmail" id="signupEmail"  placeholder="Email address" required autofocus>
+												<p class="email_feedback error"></p>
+												<input type="password" class="password form-control" name="signupPass" id="signupPass" placeholder="Password" required>
+												<input type="password" class="password form-control" name="signupPass2" id="signupPass2" placeholder="Confirm password" required>
+												<p class="password_feedback error"></p>
+												<p class="dberror error">
+												{{#if validation}}
+													{{#each validation}}
+														{{msg}}
+													<br>
+													{{/each}}
+												{{/if}}
+												</p>
+												<button class="submit_btn btn btn-primary" type="submit" name="signupForm">Sign in</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="playasguest" class="tab-pane fade">
+								<div class="container">
+									<div class="row">
+										<div class="container" id="formContainer">
+											<form id="guest-form" role="form" action="/users/guest" method="POST">
+												<h3 class="form-signin-heading">Play as a guest</h3>
+												<input type="text" class="username form-control" name="guestNickname" id="guestNickname" placeholder="Nickname" required autofocus>
+												<p class="username_feedback error"></p>
+												<p class="dberror error">
+												{{#if validation}}
+														{{validation}}
+												{{/if}}
+												</p>
+												<button class="submit_btn btn btn-primary" type="submit" name="guestForm">Play!</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 max-height" id="right-window">
+			<div class="container">
+				<div class="game-info">
+					<h1><strong>Tic Tac Toe</strong></h1>
+					<p><strong>Version:</strong> 1.0.0.<br><strong>Author:</strong> Armana Imsirevic</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

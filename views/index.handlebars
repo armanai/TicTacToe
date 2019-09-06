@@ -1,0 +1,42 @@
+<div class="container-fluid max-height">
+	<div class="row max-height">
+		<div class="col-md-6 max-height" id="right-window">
+			<div class="container">
+				<div class="game-info">
+					<h1><strong>Tic Tac Toe</strong></h1>
+					<p><strong>Version:</strong> 1.0.0.<br><strong>Author:</strong> Armana Imsirevic</p>
+				</div>
+			</div>
+			<div id="messages"></div>
+		</div>
+		<div class="col-md-6 max-height" id="left-window">
+			<div class="row" id="menu">
+				<div class="col-md-6">
+					<p>
+						{{#if user}}
+						{{user.username}}
+						{{/if}}
+					</p>
+				</div>
+				<div class="col-md-6">
+					<a class="btn btn-primary" href="users/logout"  id="logout">Logout</a>
+				</div>
+			</div>
+			<div class="row">
+
+				<table class="table table-striped header-fixed">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>Wins</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody id="onlineUsersTable">
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

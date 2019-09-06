@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<title>{{title}}</title>
+</head>
+<body>
+	<!-- <a href="users/logout">Log out</a> -->
+	<div class="container-app">
+		<div id="app">
+			<!--Disable game-->
+			<div id="disable_game"></div>
+			{{#if success_msg}}
+			<div class="alert alert-success">{{success_msg}}</div>
+			{{/if}}
+			{{#if error_msg}}
+			<div class="alert alert-danger">{{error_msg}}</div>
+			{{/if}}
+			{{#if error}}
+			<div class="alert alert-danger">{{error}}</div>
+			{{/if}}
+			{{{body}}}
+		</div> 
+	</div>
+	<!-- Reusable Modal -->
+	<div class="modal fade" id="modals" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="modals-title">Info</h4>
+				</div>
+				<div class="modal-body">
+					<p id="modals-text"></p>
+				</div>
+				<div class="modal-footer" id="modals-footer">
+					<button type="button" id="disconnectModalOk" class="btn btn-success" data-dismiss="modal" aria-hidden="true">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{{#if user}}
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+	var socket = io();
+	var me = null;
+</script>
+{{#if game}}
+<script src="/javascripts/tictactoe.js"></script>
+<script src="/javascripts/chat.js"></script>
+<script src="/javascripts/game.js"></script>
+{{else}}
+<script src="/javascripts/script.js"></script>
+{{/if}}
+{{/if}}
+<script type="text/javascript">
+	function showTheRightForm() {
+		$('#nav-tabs').find('a').each(function(){
+			if($(this).hasClass('active')){
+				var href = $(this).attr('href');
+				$(href).addClass('in active show');
+			}
+		});
+	}
+	function setModal(title, body, button1 = {needed: true, id: "ok", class: "btn btn-success", text: "OK", dismiss: true, listener: null}, button2 = {needed: false}){
+		cleanModal();
+		$('#modals-title').text(title);
+		$('#modals-text').text(body);
+		if (button1.needed) {
+			var button = "<button type='button' id="+button1.id+" class="+button1.class+" data-dismiss='modal' aria-hidden='true'>"+button1.text+"</button>"
+			$('#modals-footer').html(button);
+			if (button1.listener !== null) {
+				$('#' + button1.id).on('click', button1.listener);
+			}
+		}
+		if (button2.needed) {
+			var button = "<button type='button' id="+button2.id+" class="+button2.class+" data-dismiss='modal' aria-hidden='true'>"+button2.text+"</button>"
+			$('#modals-footer').append(button);
+			if (button2.listener !== null) {
+				$('#' + button2.id).on('click', button2.listener);
+			}
+		}
+	}
+	function cleanModal(){
+		$('#modals-title').html();
+		$('#modals-text').html();
+		$('#modals-footer').html();
+	}
+
+	showTheRightForm();
+</script>
+</body>
+</html>
