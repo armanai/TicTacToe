@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-## To run this project execute following commands:
+To run this project execute following commands:
 ```
 cd TicTacToe
 npm install
